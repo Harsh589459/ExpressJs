@@ -1,23 +1,24 @@
-const http = require('http');
-const express = require('express');//it exports the function here
+const express = require('express');
+const bodyParser = require('body-parser')
 
 const app = express();
 
+app.use(bodyParser.urlencoded({extended:false}))//read the req.body
 
-//next is a function that is passed si receiving another function has to be executed to travel along next middle ware
-app.use((req,res,next)=>{//use allows us to add middleware function
-console.log("in the middleware")
-next();//to allow the next middleware to run
+app.use('/add-product', (req, res, next) => {
+    res.send('<form action="/product" method="POST"><input type="text" name="title"> <div><input type="number" name="product-size"></div><button type="submit">Add Product</button></form>')
 })
-app.use((req,res,next)=>{//use allows us to add middleware function
+
+app.use("/product",(req,res,next)=>{
+    console.log(req.body);//if there is no body parser then it will show undefined
+    console.log("first")
+    res.redirect('/');
+});
+app.use('/', (req, res, next) => {
     console.log("in the another middleware")
     res.send('<h1>Hello from Express!</h1>')
-    })
-
-
-// const server = http.createServer(app);
-// server.listen(3000);
+})
 
 app.listen(3000);
 
-
+//body-parser
