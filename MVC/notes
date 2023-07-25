@@ -1,0 +1,9 @@
+Sepration of Concerns--different part of yur code do different things
+
+MVC-Models Views Controllers
+
+Models-Represent your data in your code. Work with your data(e.g save,fetch);
+
+Views-What the user sees && Decoupled from your application code
+
+Controllers - Connecting your models and Views && contains "in-between" logic && Controllers  splits across middle ware functions
